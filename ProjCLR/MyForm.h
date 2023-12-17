@@ -1667,9 +1667,20 @@ namespace ProjCLR {
 		}
 #pragma endregion
 
-		
+	Control^ FindStartPoint() 
+	{
+		for (int x = 0; x < 5; x++)								
+		{
+			for (int y = 0; y < 6; y++)
+			{
+				
+					
+			}
+		}
+	}
 
 	private: System::Void Solve_Click(System::Object^ sender, System::EventArgs^ e) {
+		
 		
 		array <int, 2>^ NumberArray = gcnew array <int, 2>(5, 5);
 		for (int x = 0; x < 5; x++)
@@ -1687,21 +1698,30 @@ namespace ProjCLR {
 			}
 		}
 
-		for (int x = 0; x < 5; x++)
+		for (int x = 0; x < 5; x++)								//Nulls
 		{
 			for (int y = 0; y < 5; y++)
 			{
 				if (NumberArray[x,y] == 0) 
 				{
+					if (UpButtonArray[x, y]->BackColor != Color::Red)
 					UpButtonArray[x, y]->BackColor = Color::Red;
-					UpButtonArray[x, y + 1]->BackColor = Color::Red;
-					DownButtonArray[x, y]->BackColor = Color::Red;
-					DownButtonArray[x + 1, y]->BackColor = Color::Red;
+					else UpButtonArray[x, y]->BackColor = Color::White;
+					if (UpButtonArray[x, y + 1]->BackColor != Color::Red)
+						UpButtonArray[x, y + 1]->BackColor = Color::Red;
+					else UpButtonArray[x, y + 1]->BackColor = Color::White;
+					if (DownButtonArray[x, y]->BackColor != Color::Red)
+						DownButtonArray[x, y]->BackColor = Color::Red;
+					else DownButtonArray[x, y]->BackColor = Color::White;
+					if (DownButtonArray[x + 1, y]->BackColor != Color::Red)
+						DownButtonArray[x + 1, y]->BackColor = Color::Red;
+					else DownButtonArray[x + 1, y]->BackColor = Color::White;
+					
 				}
 			}
 		}
 
-		if (NumberArray[0, 0] == 3)
+		if (NumberArray[0, 0] == 3)									//Corners
 		{
 			UpButtonArray[0, 0]->BackColor = Color::Black;
 			DownButtonArray[0, 0]->BackColor = Color::Black;
@@ -1722,20 +1742,19 @@ namespace ProjCLR {
 			DownButtonArray[5,0]->BackColor = Color::Black;
 		}
 
-		for (int x = 0; x < 5; x++)
+		for (int x = 0; x < 5; x++)								
 		{
 			for (int y = 0; y < 5; y++)
 			{
-				if (CenterButtonArray[x, y]->Text != String::Empty)
+				if (NumberArray[x, y] == 3)
 				{
-					NumberArray[x, y] = Convert::ToInt32(CenterButtonArray[x, y]->Text);
-				}
-				else
-				{
-					NumberArray[x, y] = -1;
+					
+
 				}
 			}
 		}
+
+		Control^ CurrentTile = FindStartPoint();
 
 		/*CenterButtonArray[1, 3]->BackColor = Color::Black;
 		UpButtonArray[1, 3]->BackColor = Color::Black;
